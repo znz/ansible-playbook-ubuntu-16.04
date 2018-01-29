@@ -1,0 +1,5 @@
+---
+- src: znzj.ja_jp
+- src: znz.ufw
+- src: znz.journald
+- src: znzj.rbenv
