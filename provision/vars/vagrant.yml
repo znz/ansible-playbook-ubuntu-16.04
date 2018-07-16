@@ -1,0 +1,30 @@
+---
+journald_users:
+- 'vagrant'
+
+sshd_allow_users:
+- 'root'
+- 'vagrant'
+
+sshd_allow_tcp_wrappers:
+- '10.'
+- '.jp'
+
+nadoka:
+- service_name: 'fprog'
+  irc_host: ''
+  irc_port: 6697
+  irc_pass: "nil"
+  irc_ssl_params: '{}'
+  channel_info: "'#private' => { key: 'channelkey' }"
+
+mailuser_name: "vagrant"
+mailuser_password: "$6$vVSBdkuZ$lW7kbwZtqiO9fn9yo51Y0LethZqMp1ejoMoxmt3/SS6e2r2gHJEbmkUleMkB0BDiG5mRdH4rl4yrcOXcwuiOa1"
+mailuser_forward:
+  example: "~/Maildir/.example/"
+  root: "~/Maildir/.root/"
+
+postfix_main_cf_2:
+  mynetworks: "127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128 172.17.0.0/16"
+postfix_aliases:
+  root: "vagrant+root"

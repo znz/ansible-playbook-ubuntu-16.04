@@ -1,5 +1,13 @@
 ---
-- src: znzj.ja_jp
 - src: znz.ufw
 - src: znz.journald
-- src: znzj.rbenv
+- src: https://github.com/znz/ansible-role-sshd
+  version: master
+  name: znz.sshd
+- src: https://github.com/znz/ansible-role-nadoka
+  version: master
+  name: znz.nadoka
+- src: znz.unattended-upgrades
+- src: https://github.com/znz/ansible-role-dovecot-postfix
+  version: master
+  name: znz.dovecot-postfix

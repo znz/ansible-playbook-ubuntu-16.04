@@ -1,9 +1,36 @@
 ---
 - hosts: all
   become: yes
+  vars_files:
+  - vars/{{ stage }}.yml
+  - vars/{{ inventory_hostname }}.yml
+  pre_tasks:
+  - name: "Install etckeeper"
+    apt: name=etckeeper
   roles:
   - role: znz.ufw
-  - znz.journald
-  - role: znzj.ja_jp
-  - role: znzj.rbenv
-    rbenv_ruby_version: 2.4.3
+    ufw_default_forward_policy: reject
+    ufw_allow_in_tcp:
+    - comment: "HTTP"
+      port: 80
+    - comment: "HTTPS"
+      port: 443
+    - comment: "SSH"
+      port: 22
+    ufw_limit_in_tcp: []
+    ufw_allow_out_tcp:
+    - comment: "HTTP"
+      port: 80
+    - comment: "SSH"
+      port: 22
+    - comment: "SMTPS"
+      port: 465
+  - role: znz.journald
+  - role: znz.sshd
+  - role: znz.unattended-upgrades
+  - role: znz.nadoka
+  - role: mailuser
+  - role: znz.dovecot-postfix
+  tasks:
+  - name: 'Install logwatch'
+    apt: name=logwatch

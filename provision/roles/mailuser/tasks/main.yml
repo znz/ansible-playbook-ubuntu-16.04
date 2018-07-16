@@ -1,0 +1,13 @@
+---
+- name: "Add user"
+  user:
+    name: "{{ mailuser_name }}"
+    password: "{{ mailuser_password }}"
+- name: "Create .forward"
+  copy:
+    content: "{{ item.value }}\n"
+    dest: "/home/{{ mailuser_name }}/.forward+{{ item.key }}"
+    owner: "{{ mailuser_name }}"
+    group: "{{ mailuser_name }}"
+    mode: 0444
+  with_dict: "{{ mailuser_forward }}"
