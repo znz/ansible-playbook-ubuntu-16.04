@@ -7,3 +7,27 @@
   - role: znzj.ja_jp
   - role: znzj.rbenv
     rbenv_ruby_version: 2.4.3
+  tasks:
+  - name: "Install postgresql"
+    apt:
+      name: postgresql
+  - name: "Install libpq-dev for pg gem"
+    apt:
+      name: libpq-dev
+  - name: "Install python-psycopg2 for postgresql_user"
+    apt:
+      name: python-psycopg2
+  - name: "Create rails role"
+    become: yes
+    become_user: postgres
+    postgresql_user:
+      name: vagrant
+      #name: rails
+      #password: secret
+      role_attr_flags: CREATEDB,NOSUPERUSER
+  - name: "Install nodejs for asset pipeline"
+    apt:
+      name: nodejs
+  - name: "Install bash-completion"
+    apt:
+      name: bash-completion
